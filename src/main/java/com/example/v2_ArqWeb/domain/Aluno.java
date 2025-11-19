@@ -3,14 +3,11 @@ package com.example.v2_ArqWeb.domain;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Aluno {
@@ -32,6 +29,7 @@ public class Aluno {
     private String matricula;
 
     @ManyToMany(mappedBy = "alunos")
+    @JsonIgnore // evita loop infinito na serialização
     private Set<Curso> cursos = new HashSet<>();
 
     // Getters e Setters

@@ -39,26 +39,41 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(admin, user);
     }
 
-    // Configuração de segurança
-  @Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http
-        .csrf(csrf -> csrf.disable())
-        .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/h2-console/**").permitAll()
-            .requestMatchers("/alunos/**", "/cursos/**").hasRole("ADMIN")
-            .requestMatchers("/alunos", "/cursos").hasAnyRole("USER", "ADMIN")
-            .anyRequest().authenticated()
-        )
-        // Aqui vai o formLogin
-        .formLogin(form -> form
-            .defaultSuccessUrl("/swagger-ui.html", true) // redireciona para Swagger após login
-            .permitAll()
-        )
-        .httpBasic(Customizer.withDefaults())
-        .headers(headers -> headers.frameOptions(frame -> frame.disable()));
+    // Configuração de Segurança
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-    return http.build();
-}
+        http
+            .csrf(csrf -> csrf.disable())
 
+            .authorizeHttpRequests(auth -> auth
+                // LIBERADOS
+                .requestMatchers(
+                    "/swagger-ui/**",
+                    "/v3/api-docs/**",
+                    "/h2-console/**",
+                    "/actuator/**"   // <--- LIBERANDO ACTUATOR + PROMETHEUS
+                ).permitAll()
+
+                // PROTEGIDOS
+                .requestMatchers("/alunos/**", "/cursos/**").hasRole("ADMIN")
+                .requestMatchers("/alunos", "/cursos").hasAnyRole("USER", "ADMIN")
+
+                .anyRequest().authenticated()
+            )
+
+            // Login
+            .formLogin(form -> form
+                .defaultSuccessUrl("/swagger-ui/index.html", true)
+                .permitAll()
+            )
+
+            // Autenticação básica (útil para Prometheus, Grafana, scripts etc)
+            .httpBasic(Customizer.withDefaults())
+
+            // Necessário para console H2
+            .headers(headers -> headers.frameOptions(frame -> frame.disable()));
+
+        return http.build();
+    }
 }

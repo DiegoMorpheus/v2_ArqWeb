@@ -1,0 +1,49 @@
+{
+  "id": null,
+  "title": "Spring Boot Metrics",
+  "tags": ["spring", "boot", "micrometer"],
+  "timezone": "browser",
+  "schemaVersion": 36,
+  "version": 1,
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "graph",
+      "title": "HTTP Requests (Total)",
+      "targets": [
+        {
+          "expr": "sum(rate(http_server_requests_seconds_count[1m]))",
+          "legendFormat": "{{method}} {{uri}} {{status}}"
+        }
+      ],
+      "gridPos": {"x": 0, "y": 0, "w": 24, "h": 7}
+    },
+    {
+      "type": "graph",
+      "title": "HTTP Request Duration (avg/sec)",
+      "targets": [
+        {
+          "expr": "rate(http_server_requests_seconds_sum[1m]) / rate(http_server_requests_seconds_count[1m])",
+          "legendFormat": "{{method}} {{uri}}"
+        }
+      ],
+      "gridPos": {"x": 0, "y": 7, "w": 24, "h": 7}
+    },
+    {
+      "type": "graph",
+      "title": "System CPU Usage",
+      "targets": [
+        {
+          "expr": "system_cpu_usage",
+          "legendFormat": "cpu"
+        }
+      ],
+      "gridPos": {"x": 0, "y": 14, "w": 12, "h": 7}
+    },
+    {
+      "type": "graph",
+      "title": "JVM Memory Used",
+      "targets": [
+        {
+          "expr": "jvm_memory_used_bytes",
+          "leg

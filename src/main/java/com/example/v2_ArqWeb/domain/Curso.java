@@ -3,15 +3,8 @@ package com.example.v2_ArqWeb.domain;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -22,10 +15,9 @@ public class Curso {
     private Long id;
 
     @NotBlank(message = "O nome do curso é obrigatório")
-    @Size(min = 3, max = 100, message = "O nome do curso deve ter entre 3 e 100 caracteres")
+    @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres")
     private String nome;
 
-    @Positive(message = "A carga horária deve ser positiva")
     private int cargaHoraria;
 
     @ManyToMany
