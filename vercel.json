@@ -6,7 +6,10 @@
       "use": "@vercel/static-build"
     }
   ],
-  "projects": {
-    "rootDirectory": "frontend"
-  }
+  "env": {
+    "NODE_VERSION": "18"
+  },
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": "dist",
+  "rootDirectory": "frontend"
 }
