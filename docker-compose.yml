@@ -2,12 +2,28 @@ version: '3.8'
 
 services:
   app:
-    build: .                # usa o Dockerfile na raiz do backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     container_name: v2_arqweb
     ports:
-      - "8080:8080"
+      - "8081:8080"
     networks:
       - monitoring
+    environment:
+      - BACKEND_URL=http://app:8080
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: v2_frontend
+    ports:
+      - "3001:80"   # frontend servido pelo Nginx
+    networks:
+      - monitoring
+    depends_on:
+      - app
 
   prometheus:
     image: prom/prometheus
@@ -35,6 +51,7 @@ services:
 
 networks:
   monitoring:
+    driver: bridge
 
 volumes:
   grafana-storage:

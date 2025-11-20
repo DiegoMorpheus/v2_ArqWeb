@@ -1,0 +1,30 @@
+/* App.css minimalista */
+
+/* Centraliza o conteúdo principal */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Ajuste de títulos */
+h1, h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+}
+
+/* Tabelas mais legíveis */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #e5e7eb; /* cinza claro */
+  padding: 0.5rem;
+  text-align: left;
+}
+
+th {
+  background-color: #f3f4f6; /* cinza suave */
+}

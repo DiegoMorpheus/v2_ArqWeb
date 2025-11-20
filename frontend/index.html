@@ -1,9 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <title>Vite App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal Acadêmico 🎓</title>
+
+    <!-- Ícone -->
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
+    <!-- Fonte moderna -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Estilos principais (Tailwind + ajustes) -->
+    <link rel="stylesheet" href="/src/index.css" />
+
+    <!-- Meta SEO -->
+    <meta name="description" content="Portal Acadêmico 🎓 - Integração Frontend + Backend" />
+    <meta name="theme-color" content="#2563eb" />
   </head>
-  <body>
-    <div id="root"></div> <script type="module" src="/src/main.jsx"></script> </body>
+  <body class="bg-gradient-to-br from-gray-100 to-gray-200 font-[Inter] min-h-screen flex flex-col">
+    <!-- Loader inicial (aparece antes do React montar) -->
+    <div id="root" class="flex-1 flex items-center justify-center">
+      <div class="text-center animate-pulse">
+        <h1 class="text-3xl font-bold text-blue-600">Portal Acadêmico 🎓</h1>
+        <p class="text-gray-600 mt-2">Carregando aplicação...</p>
+      </div>
+    </div>
+
+    <!-- Script React -->
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
