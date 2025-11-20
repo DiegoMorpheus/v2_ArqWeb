@@ -12,7 +12,7 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:21-jre
 WORKDIR /app
 
-COPY --from=build /app/target/v2_ArqWeb-1.0.0.jar app.jar
+COPY --from=build /app/target/app.jar app.jar
 
 EXPOSE 8080
 
